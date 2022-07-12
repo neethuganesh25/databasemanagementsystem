@@ -1,0 +1,21 @@
+create table emply1(empid number(5)primary key not null,firstname varchar(30),lastname varchar(30),jobid varchar(20),managerid number(5),empsalary number,deptid number(5));
+insert into emply1 values(:empid,:firstname,:lastname,:jobid,:managerid,:empsalary,:deptid);
+select * from emply1;
+
+create table dept12(deptid number(5),deptname varchar(20)not null,mgrid number(30),locid number(20));
+insert into dept12 values(:deptid,:deptname,:mgrid,:locid);
+select * from dept12;
+
+
+
+
+create or replace trigger trig11
+after insert
+on dept12 
+for each row
+begin 
+update emply1 set empsalary=20000 where deptid=20;
+end;
+insert into dept12 values(:deptid,:deptname,:mgrid,:locid);
+select * from emply1;
+ 
