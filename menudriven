@@ -1,0 +1,45 @@
+import pymongo
+connection=pymongo.MongoClient("mongodb://localhost:27017")
+mydb=connection["empDb"]
+myemployee=mydb["employees"]
+
+
+
+while True:
+    print("  MENU  \n")
+    print("  Add an employee  \n")
+    print("  View all employee  \n")
+    print("  Search an employee  \n")
+    print("  delete an employe  \n")
+    print("  update an employee  \n")
+    option=int(input("Select an option"))
+    if option==1:
+        print("  Add an option selected  ")
+        empCode=input("enter an employee code")
+        empName=input("enter an employee name")
+        empDesignation=input("enter an employee designation")
+        data={"empCode":empCode,"empNamee":empName,"empDesig":empDesignation}
+        print(data)
+        myemployee.insert_one(data)
+    elif option==2:
+        print("  View all employee option selected ")
+        result=myemployee.find()
+        print(result)
+        for i in result:
+            print(i)
+
+
+
+    elif option==3:
+        print("  Search option selected ")
+        empCode=input("enter an employee code")
+        data={"empCode":empCode}
+        result=myemployee.find_one(data)
+        print(result)
+        
+    elif option==4:
+        print("Delete option selected")
+    elif option==5:
+        print("  update option selected  ")
+    else:
+        break
