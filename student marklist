@@ -1,0 +1,32 @@
+create table student(regno number(10),mark1 number(3),mark2 number(3),mark3 number(3),mark4 number(3),total number(10),avg number(10));
+insert into student(regno,mark1,mark2,mark3,mark4) values(:regno,:mark1,:mark2,:mark3,:mark4);
+select * from student;
+
+declare 
+cursor h is select * from student;
+x student.regno%type;
+a student.mark1%type;
+b student.mark2%type;
+c student.mark3%type;
+d student.mark4%type;
+e student.total%type;
+f student.avg%type;
+begin
+open h;
+loop
+fetch h into x,a,b,c,d,e,f;
+exit when h%notfound;
+dbms_output.put_line('roll no:'|| x);
+dbms_output.put_line('mark1:'|| a);
+dbms_output.put_line('mark2:'|| b);
+dbms_output.put_line('mark3:'|| c);
+dbms_output.put_line('mark4:'|| d);
+dbms_output.put_line('update the total');
+dbms_output.put_line('update the averge');
+
+update student set total=(mark1+mark2+mark3+mark4) where regno=x;
+update student set avg=(total/5) where regno=x;
+end loop;
+close h;
+end
+
